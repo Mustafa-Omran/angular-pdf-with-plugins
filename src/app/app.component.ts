@@ -10,7 +10,7 @@ import { DOCUMENT } from '@angular/common';
 })
 export class AppComponent {
 
-  readonly imageWidth = 208;
+  readonly imageWidth = 285;
 
   constructor(@Inject(DOCUMENT) private document) { }
 
@@ -24,12 +24,13 @@ export class AppComponent {
    */
   captureScreen() {
     const data = this.document.getElementById('content');
+
     html2canvas(data).then(canvas => {
       const imgWidth = this.imageWidth;
       const imgHeight = canvas.height * imgWidth / canvas.width;
 
       const contentDataURL = canvas.toDataURL('image/png')
-      let pdf = new jspdf('p', 'mm', 'a4');
+      let pdf = new jspdf('l', 'mm', 'a4');
       const position = 0;
 
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
